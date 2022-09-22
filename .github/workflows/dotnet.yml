@@ -8,9 +8,6 @@ on:
 
 jobs:
   build:
-    defaults:
-          run:
-            working-directory: Portal
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +16,12 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+        
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Portal.sln 
 
     - name: Build
-      run: Portal/dotnet build --no-restore
+      run: Portal/dotnet build Portal.sln --no-restore
       
 #    - name: Test
 #      run: dotnet test --no-build --verbosity normal
