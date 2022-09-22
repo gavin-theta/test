@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore Portal.sln 
 
     - name: Build
-      run: Portal/dotnet build Portal.sln --no-restore
+      run: dotnet build Portal.sln --no-restore
       
 #    - name: Test
 #      run: dotnet test --no-build --verbosity normal
