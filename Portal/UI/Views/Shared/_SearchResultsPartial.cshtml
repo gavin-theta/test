@@ -1,0 +1,48 @@
+﻿@model SearchResultsModel
+@{
+    ViewData["Title"] = "Home Page";
+    var instructions = Model?.Results ?? new List<DispatchInstruction>();
+    var instructionCounts = instructions.Count == 1 ? "matching record" : "matching records";
+}
+<div class="wrapper">
+    <div id="__SearchContent" class="wrapper-content">
+        <div>Found <span class="alert-info">@instructions.Count</span> @instructionCounts</div>
+        <div class="table-holder tableFixHead">
+            <table class="no-border">
+                <thead>
+                    <tr>
+                        <th>Dispatched</th>
+                        <th>Received</th>
+                        <th>Sequence</th>
+                        <th>Node</th>
+                        <th>Type</th>
+                        <th>Quantity (MW)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="uppercase" id="__SearchRows">
+
+@if (instructions.Any())
+{
+    foreach (var item in instructions)
+    {
+        var ackClass = item.AckType.ToUpper() == "ACKQ" ? "color-cellbg-warn" : "";
+
+                    <tr class="hover-row" data-toggle="modal" data-target="#entityModal" onclick="instructions.details('@item.WTPDispatchInstructionID')">
+                        <td>@item.DispatchTimeLocal.ToString("dd-MM-yyyy hh:mm tt")</td>
+                        <td>@item.MessageSentTimeLocal.ToString("dd-MM-yyyy hh:mm tt")</td>
+                        <td>@item.SequenceNumber</td>
+                        <td>@item.Node</td>
+                        <td>@item.PrimaryDispatchTypeCode</td>
+                        <td>@item.DispatchValue</td>
+                        <td class="@ackClass">@item.AckType</td>
+                    </tr>
+    }
+}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

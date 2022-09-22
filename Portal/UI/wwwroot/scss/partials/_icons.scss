@@ -1,0 +1,17 @@
+﻿@import '_colours';
+
+.success-icon, .error-icon, .processing-icon {
+    font-size: 48px !important;
+}
+
+.success-icon {
+    color: $success !important;
+}
+
+.processing-icon {
+    color: $gray !important;
+}
+
+.error-icon {
+    color: $error !important;
+}

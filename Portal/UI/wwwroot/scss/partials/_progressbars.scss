@@ -1,0 +1,348 @@
+
+// Progress Bars Row (scrollable?)
+.progress-bars-holder {
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $gray;
+    overflow-x: auto;
+    overflow-y: visible;
+    h4 {
+        cursor: pointer;
+    }
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        overflow-y: hidden;
+    }
+    
+}
+
+// Mini Bars Row (scrollable?)
+.mini-bars-holder {
+    padding-bottom: 35px;
+    overflow: auto;
+}
+
+// Progress Bars 
+.progress-bars {
+    display: flex;
+    justify-content: space-between;
+    .p:last-child {
+        margin-right: 0 !important;
+    }
+}
+
+.active-bars-holder {
+    cursor: pointer;
+}
+
+// Progress bar
+.p {
+    @include box_shadow_custom( 0px 2px 2px 0px rgba(0,0,0,0.15));
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    height: 3rem;
+    border-radius: 6px;
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all .2s ease;
+    min-width: 130px;
+    opacity: 1;
+    background-color: $success;
+    border: 2px solid white;
+    // Progress Bar Title
+    .title-container {
+        position: absolute;
+        width: 100%;
+        padding: 3px 5px 0 5px;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(100%);
+        // Bar Name
+        .title {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        // Numbers
+        .result {
+            font-size: 12px;
+            font-weight: 500;
+        }
+    }
+    // Bar Hover Event
+    @include media-breakpoint-up(md) {
+        &:hover {
+            opacity: .85;
+
+            .p-tooltip {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+// Progress Spaces
+
+.p-space {
+    content: " ";
+    width: 100%;
+    white-space: pre;
+    border-bottom:1px solid white;
+    &.h-0 {
+        display: none;
+    }
+    &:first-child {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    
+}
+
+.error-space {
+    background-color: $error;
+    float: left;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px
+}
+
+.blank-space{
+    background-color: white;
+    float: right;
+    border-bottom: none;
+}
+
+// Progress Bar with text inside (e.g. Dataset Impact)
+.p-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 3.5em;
+    height: auto !important;
+    min-width: 200px !important;
+    .p-content {
+        text-transform: uppercase;
+        color: white;
+        padding: 10px 15px;
+        max-width: 80%;
+        text-align: center;
+    }
+}
+
+// Data Impact
+    
+// Impact Titles
+.impact-titles {
+    flex-wrap: nowrap;
+    width: 100%;
+    flex: none;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .impact-title {
+        display: flex;
+        justify-content: space-between;
+        flex: auto;
+
+        &.pr-title {
+            width: calc(40% - 30px);
+            min-width: 415px;
+        }
+
+        &.pu-title {
+            width: calc(40% - 35px);
+            min-width: 415px;
+        }
+
+        &.po-title {
+            width: calc(20% - 30px);
+            min-width: 207px;
+        }
+
+        .impact-total {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        &:first-child {
+            margin-right: 35px;
+        }
+
+        &:last-child {
+            margin-left: 35px;
+        }
+    }   
+}
+
+.vertical-dashed {
+    margin-top: -35px;
+    margin-bottom: -30px;
+    margin-right: 15px;
+}
+
+
+// Progress Bar Tooltip
+.p-tooltip {
+    pointer-events: none;
+    position: absolute;
+    user-select: none;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    font-size: .7em;
+    width: max-content;
+    color: white;
+    font-weight: 600;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -44%);
+    transition: all .2s ease;
+    &:after {
+        bottom: -10px;
+        position: absolute;
+        content: '';
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 8px 0 8px;
+        border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    }
+    &.icon-container {
+        width: max-content;
+        svg, img, i {
+            margin-right: 15px;
+        }
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        width: 90% !important;
+    }
+}
+
+
+
+// Mini Bar
+.p-mini {
+    width: auto;
+    @include box_shadow_custom( 0px 2px 2px 0px rgba(0,0,0,0.10));
+    flex: 1;
+    height: 2.6rem;
+    border-radius: 6px;
+    margin-right: 10px;
+    position: relative;
+    z-index: 1;
+    cursor:pointer;
+    min-width: 50px !important;
+    .p-tooltip {
+        transform: translate(-50%, -60%);
+    }
+    @include media-breakpoint-up(md) {
+        &:hover {
+            opacity: .9;
+            .p-tooltip {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+// Lil circle
+.p-micro {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    flex: none;
+    margin-right: 10px !important;
+    display: inline-block;
+    cursor: default;
+    min-width: 0 !important;
+}
+
+// Icon Container
+.check-icon-container, .search-icon-container, .icon-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .search-icon, .check-icon, .icon {
+        margin: 0 auto;
+        width: 22.5px;
+        pointer-events: none;
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            margin: 0 !important;
+        }
+    }
+
+    i {
+        font-size: 20px;
+        color: white !important;
+    }
+
+    svg {
+        width: 20px !important;
+        height: 20px !important;
+        path {
+            fill: white;
+        }
+    }
+}
+
+
+// Status Bars
+.p-success {
+    background-color:$success;
+    border:2px solid white;
+}
+.p-error {
+    background-color:$error;
+    border:2px solid white;
+}
+.p-blank {
+    background-color:$blank;
+    border:2px solid white;
+    box-shadow: none !important;
+}
+.p-review {
+    border:2.25px dashed $success;
+    box-shadow: none !important;
+}
+.p-home {
+    width: 50px;
+    min-width: 0px !important;
+    flex: none !important;
+}
+
+
+// Active Progress Bar Outline 
+.p-active {
+    &:after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        width: calc(100% + 19px);
+        height: calc(100% + 37px);
+        background: transparent;
+        left: 50%;
+        top: -10px;
+        transform: translateX(-50%);
+        border: 3px solid $success;
+        border-radius: 6px;
+    }
+}
+
+
+// Status Text
+.error-text {
+    color: $error;
+}
+.success-text {
+    color: $success;
+}

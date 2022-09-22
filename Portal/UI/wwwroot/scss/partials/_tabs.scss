@@ -1,0 +1,53 @@
+
+// Tabs Holder
+.tabs-holder {
+    
+  // Tabs
+  .nav-tabs {
+    border: none; 
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    // Shadow Fix
+    .nav-item {
+      margin-bottom: -4px;
+      position: relative;
+      flex: none;
+      &:after {
+        height: 6px;
+        width: 100%;
+        background: white;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        content: "";
+      }
+    }
+
+    // Scrollbar
+    &::-webkit-scrollbar-track {
+      background: white;
+    }
+
+
+
+    // Tab Link
+    .nav-link {
+      border: none;
+      border-radius: 6px 6px 0 0;
+      opacity: .4;
+      transition: all .2s;
+      &:hover {
+        opacity: 1;
+      }
+      &.active {
+        background: white;
+        opacity: 1;
+        color: black !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+      }
+    }
+  }
+}

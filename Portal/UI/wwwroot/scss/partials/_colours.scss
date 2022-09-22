@@ -1,0 +1,46 @@
+$success: #ff6a00;
+$error: #c82832;
+$warning: #FFA806;
+$info: #ffffff;
+$blank: #E9EEF2;
+$gray: #D1D1D1;
+
+$linkColor: #009FDF;
+$cellBgColor:#ffffe6;
+$cellBgWarningColor: rgba(255, 168, 6, 0.2);
+$brandDark:#003865;
+$brandLight: #009FDF;
+$corporate: #005EB8;
+$safety: #CEDC00;
+$social: #ED8B00;
+$black:#000000;
+$black60:#818285;
+
+
+.color-success {
+    color: $success !important;
+}
+
+.color-error {
+    color: $error !important;
+}
+
+.color-cellbg {
+    background-color:$cellBgColor;
+}
+
+.color-cellbg-warn {
+    background-color: $cellBgWarningColor;
+}
+
+.color-gray {
+    color: $gray;
+}
+
+.color-black {
+    color: black !important;
+}
+
+.bg-gray {
+    background: $blank !important;
+}

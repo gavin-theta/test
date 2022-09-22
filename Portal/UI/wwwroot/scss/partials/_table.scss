@@ -1,0 +1,120 @@
+// Table Holder
+.table-holder {
+    overflow: auto;
+    max-height: 75vh;
+
+    table {
+        display: inline-table;
+        width: min-content;
+        min-width: 100%;
+
+        th, td {
+            border: 1px solid $brandLight;
+            padding: 10px 15px;
+        }
+        // header cells
+        th {
+            color: white;
+            background: $brandLight;
+        }
+        // cells
+        td {
+            font-size: 0.9em;
+        }
+
+        .gray-bg {
+            background: $blank;
+        }
+
+        thead {
+            tr {
+                border: 1px solid #BCC7D9 !important;
+                padding: 10px 15px !important;
+                color: white !important;
+                background: $brandLight !important;
+
+                th {
+                    color: white !important;
+                    background: $brandLight !important;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    font-size: 0.9em !important;
+                    border: 1px solid #BCC7D9 !important;
+                    padding: 10px 15px !important;
+                }
+            }
+        }
+    }
+    // No Border
+    table.no-border {
+        th, td {
+            border: none;
+            border-top: 1px solid $brandLight;
+        }
+
+        tr:last-child {
+            td {
+                border-bottom: 1px solid $brandLight;
+            }
+        }
+        // header cells
+        th {
+            color: black;
+            background: $blank;
+        }
+    }
+    // Hover Row
+    table {
+        @include media-breakpoint-up(md) {
+            tr.hover-row {
+                transition: all .3s;
+                background: white;
+                cursor: pointer;
+                &:hover {
+                    background: rgba(#F0F3F5, .8);
+                }
+            }
+        }
+    }
+
+    table.hover-body {
+        @include media-breakpoint-up(md) {
+            tbody {
+                transition: all .2s;
+                background: white;
+
+                &:hover {
+                    background: rgba(#F0F3F5, .5);
+                }
+            }
+        }
+    }
+
+    .interactive {
+        cursor: pointer;
+    }
+}
+
+.cell-record-title {
+    width: 20%;
+    color: white !important;
+    background: $brandLight !important;
+}
+
+.cell-ack-warn {
+    background: $brandLight !important;
+}
+
+.tableFixHead {
+    overflow-y: auto;
+ thead th {
+    position: sticky;
+    top: 0;
+}
+
+}

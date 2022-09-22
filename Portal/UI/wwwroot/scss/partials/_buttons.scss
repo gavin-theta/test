@@ -1,0 +1,9 @@
+
+
+button, input[type=button] {
+    font-size:1em;
+    font-weight: 600;
+    color: $linkColor;
+    text-transform: uppercase;
+    transition: all .2s;
+}

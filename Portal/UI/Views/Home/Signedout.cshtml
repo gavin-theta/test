@@ -1,0 +1,41 @@
+﻿@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Signed Out</title>
+
+	<!-- CSS scripts-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+
+	<environment include="Development">
+		<link rel="stylesheet" href="~/css/main.css" asp-append-version="false" />
+	</environment>
+
+	<environment exclude="Development">
+		<link rel="stylesheet" href="~/css/main.min.css" asp-append-version="true" />
+	</environment>
+</head>
+<body>
+	<header id="header">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="logo-container">
+					<img src="~/img/4080 WEL Networks Logo-01.png" />
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container-fluid main-container ">
+		<h1><span class="med"><i class="fas fa-sign-out-alt"></i>&nbsp;Signed Out</span></h1>
+		<hr class="mb-5">
+		<div>You have been signed out. <a href="/"> Sign back in.</a></div>
+	</div>
+</body>
+</html>

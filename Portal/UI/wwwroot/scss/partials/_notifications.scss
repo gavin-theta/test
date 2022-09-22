@@ -1,0 +1,189 @@
+// Toasts Floating
+.toast-holder {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 9;
+    .toast {
+        opacity: 1;
+    }
+}
+
+// Basic Toast
+.toast {
+    min-width: 400px;
+    max-width: 500px;
+    border: none;
+    border-radius: 5px;
+    @include box_shadow_custom( 0px 1px 35px 0px rgba(0,0,0,0.2));
+
+    .toast-header {
+        padding: 0.45rem 0.75rem;
+        background: rgba(0,0,0,0.03);
+        // title
+        strong {
+            font-size: 1.2em;
+            color: black;
+            text-transform: uppercase;
+        }
+        // time
+        .text-muted {
+            color: $success;
+        }
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 1.1rem;
+    }
+    // Warning/Error Toast
+    &.toast-error, &.toast-warning, &.toast-success {
+        .toast-header {
+            * {
+                color: white !important;
+            }
+        }
+
+        * {
+            color: white;
+        }
+    }
+
+    &.toast-error {
+        background: $error;
+    }
+
+    &.toast-warning {
+        background: $warning;
+    }
+
+    &.toast-success {
+        background: $success;
+    }
+
+    &.toast-info {
+        background: $info;
+    }
+}
+
+// Notifications Panel
+.notification-panel {
+    background: white;
+    @include box_shadow_custom( 0px 1px 35px 0px rgba(0,0,0,0.2));
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 500px;
+    height: 100vh;
+    z-index: 12;
+    display: flex;
+    justify-content: center;
+    transition: all .3s ease;
+    .notifications-holder {
+        overflow-y: auto;
+        overflow-x: visible;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px 5px;
+        z-index: 13;
+        width:100%
+    }
+    .toast {
+        @include box_shadow(2);
+        opacity: 1;
+        flex: none;
+    }
+    
+    // Trigger
+    .notifications-trigger {
+        background: white;
+        position: absolute;
+        width: 40px;
+        height: 60px;
+        left: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 10px 0 0 10px;
+        @include box_shadow_custom(-9px 1px 15px 0px rgba(0,0,0,0.07));
+        cursor: pointer;
+        &:before, &:after {
+            content: "";
+            pointer-events: none;
+            user-select: none;
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: transparent;
+            border-radius: 50%;
+            border-bottom: 20px solid transparent;
+            border-top: 20px solid transparent;
+            border-right: 16px solid white;
+        }
+        &:before {
+            top: -52px;
+            right: -18px;
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            top: 42px;
+            right: -18px;
+            transform: rotate(-45deg);
+        }
+        
+        // Bell With counter
+        .bell {
+            position: relative;
+            width: auto;
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            opacity: 1;
+            margin-left: -1px;
+            svg {
+                width: 1.6rem;
+                height: 1.5rem;
+                path {
+                    fill: $success;
+                }
+            }
+            .notif-counter {
+                content: "";
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                background: $error;
+                border-radius: 50%;
+                color: white;
+                top: 10px;
+                right: 4px;
+                font-size: 12px;
+                line-height: 20px;
+            }
+
+        }
+        @include media-breakpoint-up(md) {
+            &:hover {
+                .bell {
+                    opacity: .8;
+                }
+            }
+        }
+    }
+
+    // Collapsed
+    &.collapsed {
+        box-shadow: none !important;
+        right: -500px;
+        &:hover {
+            right: -490px;
+        }
+    }
+}
+
+.notifications-empty {
+    
+}

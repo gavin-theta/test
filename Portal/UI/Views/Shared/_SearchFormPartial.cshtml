@@ -1,0 +1,45 @@
+﻿@model SearchResultsModel
+@{
+    var results = Model;
+}
+
+<form asp-controller="Search" asp-action="" method="post">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <input id="dateRange" name="dateRange" type="text" class="form-control" placeholder="Enter date range" readonly value="@results?.DateRange">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <select  class="form-control" asp-for="Node" asp-items="@(new SelectList(@ViewBag.Nodes, "Id", "Name"))">
+                    <option disabled selected>Please Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <select class="form-control" asp-for="Product" asp-items="@(new SelectList(@ViewBag.DispatchTypes, "Id", "Name"))">
+                    <option disabled selected>Please Select</option>
+                </select>
+            </div>
+        </div><div class="form-group">
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+        $('input[name="dateRange"]').daterangepicker({
+        timePicker: true,
+            locale: {
+            format: 'DD/MM/YYYY hh:mm A',
+                minYear: 2000,
+                maxDate: moment()
+            }
+        });
+    });
+</script>

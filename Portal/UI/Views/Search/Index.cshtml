@@ -1,0 +1,26 @@
+﻿
+
+<div class="container-fluid main-container ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Search</li>
+        </ol>
+    </nav>
+    <div id="__SearchCollapseContainer" class="wrapper-holder collapse-container mb-5" data-collapsecontent="__SearchContent">
+        <div class="wrapper-title">
+            <h2 tabindex="0" class="collapse-trigger">Search <i class="fas fa-chevron-down collapse-chevron"></i></h2>
+        </div>
+        <div id="__Search_Wrapper">
+            <div class="wrapper">
+                <div id="__SearchContent" class="wrapper-content">
+                    <partial name="_SearchFormPartial" />
+                    <partial name="_SearchResultsPartial" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_DetailsModal" />

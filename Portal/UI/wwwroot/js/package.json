@@ -1,0 +1,19 @@
+{
+  "name": "welnetworkcssbuilder",
+  "repository": "ADO",
+  "version": "1.0.0",
+  "description": "portal css build script",
+  "main": "main.js",
+  "scripts": {
+    "build": "npm run css-build",
+    "css-build": "node-sass ../scss/main.scss ../css/main.css"
+  },
+  "author": "theta",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.4.1"
+  },
+  "devDependencies": {
+    "node-sass": "^7.0.1"
+  }
+}

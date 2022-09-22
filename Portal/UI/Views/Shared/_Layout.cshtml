@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- CSS scripts-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/main.css" asp-append-version="false" />
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/main.min.css" asp-append-version="true" />
+    </environment>
+
+    <!-- JS scripts-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/js/all.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/utility.js" asp-append-version="false"></script>
+        <script src="~/js/notifications.js" asp-append-version="false"></script>
+        <script src="~/js/instructions.js" asp-append-version="false"></script>
+        <script src="~/js/jquery.stickytable.js" asp-append-version="false"></script>
+        <script src="~/js/signalr/signalr.js" asp-append-version="false"></script>
+    </environment>
+
+    <environment exclude="Development">
+        <script src="~/js/utility.min.js" asp-append-version="true"></script>
+        <script src="~/js/notifications.min.js" asp-append-version="true"></script>
+        <script src="~/js/instructions.min.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.stickytable.min.js" asp-append-version="true"></script>
+        <script src="~/js/signalr/signalr.min.js" asp-append-version="true"></script>
+    </environment>
+</head>
+
+<body>
+    @Html.AntiForgeryToken()
+
+    <!-- Header -->
+    <partial name="_Header" />
+
+    <!-- Content -->
+    @RenderBody()
+
+    <!-- Footer -->
+    <partial name="_Footer" />
+
+    <!-- Scripts -->
+    @RenderSection("Scripts", required: false)
+
+    <!-- Floating Toasts Holder -->
+    <div id="toast-holder" class="toast-holder" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel collapsed">
+        <div id="notifications-holder" class="notifications-holder">
+            <div class="notifications-clear w-100 text-center mb-2 mt-2">
+                <a class="primary-link notif-clear" onclick="notifications.clear(true);">Clear All</a>
+            </div>
+            <div class="notifications-empty w-100 h-100 d-flex align-items-center justify-content-center">
+                <div class="nothing-to-show">
+                    <img id="logo" src="~/img/welnetworks_logo.png" />
+                    <p class="text-center mb-0">Nothing to show</p>
+                </div>
+            </div>
+        </div>
+        <div class="notifications-trigger">
+            <div class="bell">
+                <i class="fas fa-bell"></i>
+                <div id="notif-counter" class="notif-counter hidden">
+                    0
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="generalErrorModalDialog" tabindex="-1" role="dialog"
+         aria-labelledby="generalErrorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="generalErrorModal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="bold color-error"><i class="fas fa-exclamation"></i>Error</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3><span id='generalErrorTitle'></span></h3>
+                    <div id='generalErrorMessage'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/main.js"></script>
+    </environment>
+
+    <environment exclude="Development">
+        <script src="~/js/main.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <script type="text/javascript">
+        "use strict";
+        var connection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").withAutomaticReconnect([0, 1000, 5000, 7000, 15000, null]).build();
+
+        connection.on("HEARTBEAT", function (message) {
+            const notification = JSON.parse(message);
+            notifications.showHeartbeat(notification);
+        });
+
+        connection.start().then(function () {
+           
+        }).catch(function (err) {
+            console.error("Notification error : " + err.message);
+            return err.toString();
+        });
+
+        notifications.init();
+    </script>
+
+    <script type="text/javascript">
+        setTimeout(function () {
+            notifications.addError("Authentication", "You were signed out due to inactivity.", notifications.notificationOnly);
+            location.replace("/signout/inactive");
+        }, @ViewData["MaxInactiveTime"]);
+
+         setTimeout(function () {
+           notifications.addWarning("Authentication", "You will be signed out shortly out to inactivity. <a href='/'>Reload</a>.", notifications.toastAndNotification);
+        }, @ViewData["MaxInactiveWarningTime"]);
+
+    </script>
+
+</body>
+
+</html>

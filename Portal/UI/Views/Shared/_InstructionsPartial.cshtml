@@ -1,0 +1,71 @@
+﻿<div id="__InstructionsCollapseContainer" class="wrapper-holder collapse-container mb-5" data-collapsecontent="__InstructionsContent">
+    <div class="wrapper-title">
+        <h2 tabindex="0" class="collapse-trigger">Dispatch Instructions <i class="fas fa-chevron-down collapse-chevron"></i></h2>
+    </div>   
+    <div id="__Instructions_Wrapper">
+        <div class="wrapper">
+            <div id="__InstructionsContent" class="wrapper-content">
+                <div class="table-holder tableFixHead">
+                    <table class="no-border">
+                        <thead>
+                            <tr>
+                                <th>Dispatched</th>
+                                <th>Received</th>
+                                <th>Sequence</th>
+                                <th>Node</th>
+                                <th>Type</th>
+                                <th>Quantity (MW)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="uppercase" id="__InstructionsRows">
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <div id="__loadMoreContainer">
+                    <button type="button" class="btn btn-primary btn-block" onclick="loadMore()"><span>Load more <i id="__lm_Instructions" class='fas fa-chevron-down'></i></span></button>
+                </div>
+                <br />
+                <div>
+                    <label><strong>Auto Ack</strong></label>
+                    <div class="btn-group btn-group-toggle disabled" data-toggle="buttons">
+                        <label class="btn btn-secondary active disabled not-allowed">
+                            <input type="radio" name="options" id="optionAuto" autocomplete="off" checked> Auto
+                        </label>
+                        <label class="btn btn-outline-dark disabled not-allowed">
+                            <input type="radio" name="options" id="optionManual" autocomplete="off"> Manual
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/instructions.js"></script>
+    </environment>
+
+    <environment exclude="Development">
+        <script src="~/js/instructions.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script type="text/javascript">
+        var currentPage = 1;
+
+        setInterval(update, 30000);
+
+        function update() {
+            instructions.update(currentPage, true);           
+        }
+
+        function loadMore() {
+            currentPage += 1;
+            instructions.load(currentPage,true);
+        }
+
+        instructions.load();
+    </script>
+
+</div>
+

@@ -1,0 +1,75 @@
+.icon-text {
+    color: white !important;
+    font-weight: 800 !important;
+}
+
+
+    .t {
+      
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0;
+       
+        
+        position: relative;
+        transition: all .2s ease;
+        width: 130px;
+        opacity: 1;
+        background-color:none;
+        border: 2px solid white;      
+       
+        // Bar Hover Event
+        @include media-breakpoint-up(md) {
+            &:hover {
+                opacity: .85;
+
+                .p-tooltip {
+                    opacity: 1;
+                }
+            }
+        }    
+}
+
+.t-tooltip {
+    pointer-events: none;
+    position: absolute;
+    user-select: none;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    font-size: .7em;
+    width: max-content;
+    color: white;
+    font-weight: 600;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -44%);
+    transition: all .2s ease;
+
+    &:after {
+        bottom: -10px;
+        position: absolute;
+        content: '';
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 8px 0 8px;
+        border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+    }
+
+    &.icon-container {
+        width: max-content;
+
+        svg, img, i {
+            margin-right: 15px;
+        }
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        width: 90% !important;
+    }
+}
