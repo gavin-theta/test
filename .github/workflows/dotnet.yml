@@ -22,6 +22,16 @@ jobs:
 
     - name: Build
       run: dotnet build Portal.sln --no-restore
+          
+#    - name: Test
+#      run: dotnet test Portal.sln --no-build --verbosity normal
+
+    - name: Restore dependencies
+      run: dotnet restore Client.sln 
+
+    - name: Build
+      run: dotnet build Client.sln --no-restore
       
 #    - name: Test
-#      run: dotnet test --no-build --verbosity normal
+#      run: dotnet test Client.sln --no-build --verbosity normal
+      
